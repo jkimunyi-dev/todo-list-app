@@ -1,28 +1,28 @@
-// JavaScript
+
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
+    
     const todoInput = document.getElementById('todo-input');
     const addButton = document.getElementById('add-button');
     const todoList = document.getElementById('todo-list');
     const filterButtons = document.querySelectorAll('.filter-btn');
     
-    // State
+    
     let todos = [];
     let currentFilter = 'all';
     
-    // Load todos from localStorage
+    
     function loadTodos() {
         const storedTodos = localStorage.getItem('todos');
         todos = storedTodos ? JSON.parse(storedTodos) : [];
         renderTodos();
     }
     
-    // Save todos to localStorage
+    
     function saveTodos() {
         localStorage.setItem('todos', JSON.stringify(todos));
     }
     
-    // Render todos based on current filter
+    
     function renderTodos() {
         todoList.innerHTML = '';
         
@@ -41,18 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
             todoItem.className = `todo-item ${todo.completed ? 'completed' : ''}`;
             todoItem.setAttribute('data-id', todo.id);
             
-            // Checkbox
+            
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'checkbox';
             checkbox.checked = todo.completed;
             checkbox.addEventListener('change', () => toggleComplete(todo.id));
             
-            // Todo content container
+            
             const todoContent = document.createElement('div');
             todoContent.className = 'todo-content';
             
-            // Todo text
+            
             const todoText = document.createElement('p');
             todoText.className = 'todo-text';
             todoText.textContent = todo.text;
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             todoContent.appendChild(todoText);
             
-            // Action buttons
+            
             const actions = document.createElement('div');
             actions.className = 'actions';
             
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             actions.appendChild(editBtn);
             actions.appendChild(deleteBtn);
             
-            // Append all elements
+            
             todoItem.appendChild(checkbox);
             todoItem.appendChild(todoContent);
             todoItem.appendChild(actions);
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Filter todos based on currentFilter
+    
     function filterTodos() {
         switch(currentFilter) {
             case 'active':
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Add new todo
+    
     function addTodo() {
         const text = todoInput.value.trim();
         if (text === '') return;
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         todoInput.focus();
     }
     
-    // Toggle todo complete status
+    
     function toggleComplete(id) {
         todos = todos.map(todo => 
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTodos();
     }
     
-    // Start editing todo
+    
     function startEditing(id) {
         const todoItem = document.querySelector(`[data-id="${id}"]`);
         const todoContent = todoItem.querySelector('.todo-content');
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         editInput.select();
     }
     
-    // Save edited todo
+    
     function saveEdit(id, newText) {
         newText = newText.trim();
         if (newText === '') return;
@@ -180,19 +180,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTodos();
     }
     
-    // Cancel editing
+    
     function cancelEdit() {
         renderTodos();
     }
     
-    // Delete todo
+    
     function deleteTodo(id) {
         todos = todos.filter(todo => todo.id !== id);
         saveTodos();
         renderTodos();
     }
     
-    // Set up event listeners
+    
     addButton.addEventListener('click', addTodo);
     
     todoInput.addEventListener('keydown', (e) => {
@@ -210,6 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Initial load
+    
     loadTodos();
 });

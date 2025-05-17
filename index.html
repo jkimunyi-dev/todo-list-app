@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Todo List App</title>
 </head>
 <body>
     <div class="container">
         <h1 class="app-title">Todo List App</h1>
         
-        <!-- Todo Input -->
+        
         <div class="todo-input-container">
             <input type="text" id="todo-input" placeholder="Add a new task...">
             <button id="add-button">Add</button>
         </div>
         
-        <!-- Filters -->
+        
         <div class="filters">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="active">Active</button>
             <button class="filter-btn" data-filter="completed">Completed</button>
         </div>
         
-        <!-- Todo List -->
+        
         <ul class="todo-list" id="todo-list"></ul>
         
         <footer>
